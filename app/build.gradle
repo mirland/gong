@@ -15,6 +15,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: "com.github.konifar.gradle.unused-resources-remover"
+
+unusedResourcesRemover {
+    extraRemovers = [
+            createXmlValueRemover("defaults", "integer", "integer")
+    ]
+    excludeNames = ["attrs_proportional_layout.xml"]
+}
 
 if (getEnvVariable('KEYSTORE_FILE') != null) {
     // Avoid Signing not ready issues in Gradle Play Publisher plugin
